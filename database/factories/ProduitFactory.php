@@ -5,12 +5,12 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Category;
-use App\Models\Fournisseur;
+use App\Models\Fournisseurs;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Fournisseur>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Fournisseurs>
  */
-class FournisseurFactory extends Factory
+class ProduitFactory extends Factory
 {
     /**
      * Define the model's default state.
