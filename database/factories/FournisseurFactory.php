@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Fournisseur>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Fournisseurs>
  */
 class FournisseurFactory extends Factory
 {
@@ -25,12 +25,6 @@ class FournisseurFactory extends Factory
             'email'=>fake()->email(),
             'ville'=>fake()->company(),
             'telephone'=>fake()->phone()
-            // //$table->id();
-            // $table->string('nom');
-            // $table->string('email');
-            // $table->string('ville');
-            // $table->string('telephone');
-            // $table->timestamps();
-        ];
+       ];
     }
 }
