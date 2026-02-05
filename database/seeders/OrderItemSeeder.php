@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Database\Seeder;
 
-class OrderSeeder extends Seeder
+class OrderItemSeeder extends Seeder
 {
     public function run(): void
     {
-        Order::factory(10)->create();
+        OrderItem::factory(20)->create();
     }
 }
