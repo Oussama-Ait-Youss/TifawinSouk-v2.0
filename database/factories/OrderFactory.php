@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -11,27 +10,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OrderFactory extends Factory
 {
-    protected $model = Order::class;    
-
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
             'user_id' => User::factory(),
-            'customer_name' => $this->faker->name(),
-            'customer_address' => $this->faker->address(),
-            'customer_phone' => $this->faker->phoneNumber(),
-            'status' => $this->faker->randomElement([
-                Order::STATUS_PENDING,
-                Order::STATUS_SHIPPED,
-                Order::STATUS_DELIVERED,
-                Order::STATUS_CANCELED,
-            ]),
-            'total' => 0, 
+            'customer_name' => fake()->name(),
+            'customer_address' => fake()->address(),
+            'customer_phone' => fake()->phoneNumber(),
+            'status' => fake()->randomElement(['pending', 'shipped', 'delivered', 'canceled']),
+            'total' => fake()->randomFloat(2, 0, 1000),
         ];
-    }
-
-    public function pending(): static
-    {
-        return $this->state(fn () => ['status' => Order::STATUS_PENDING]);
     }
 }

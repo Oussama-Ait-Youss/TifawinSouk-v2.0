@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Produit;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +13,8 @@ class OrderSeeder extends Seeder
 {
     public function run(): void
     {
-        if (!Schema::hasTable('products')) {
-            $this->command?->warn('OrderSeeder skipped: products table not found yet.');
-            return;
-        }
-
-        $productModel = 'App\\Models\\Product';
-        if (!class_exists($productModel)) {
-            $this->command?->warn('OrderSeeder skipped: Product model not found yet.');
+        if (!Schema::hasTable('produit')) {
+            $this->command?->warn('OrderSeeder skipped: produit table not found yet.');
             return;
         }
 
@@ -27,7 +22,7 @@ class OrderSeeder extends Seeder
         $users = User::query()->inRandomOrder()->limit(10)->get();
 
         /** @var \Illuminate\Database\Eloquent\Collection $products */
-        $products = $productModel::query()->inRandomOrder()->limit(30)->get();
+        $products = Produit::query()->inRandomOrder()->limit(30)->get();
 
         if ($users->isEmpty() || $products->isEmpty()) {
             $this->command?->warn('OrderSeeder skipped: missing users or products data.');
@@ -45,7 +40,7 @@ class OrderSeeder extends Seeder
                 $product = $products->random();
 
                 $qty = rand(1, 3);
-                $unit = (float) $product->price;
+                $unit = (float) $product->prix_vente;
                 $line = round($qty * $unit, 2);
 
                 OrderItem::create([
