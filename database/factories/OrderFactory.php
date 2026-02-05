@@ -5,16 +5,10 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
- */
 class OrderFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Order::class;
+
     public function definition(): array
     {
         return [
@@ -22,8 +16,8 @@ class OrderFactory extends Factory
             'customer_name' => fake()->name(),
             'customer_address' => fake()->address(),
             'customer_phone' => fake()->phoneNumber(),
-            'status' => fake()->randomElement(['pending', 'shipped', 'delivered', 'canceled']),
-            'total' => fake()->randomFloat(2, 0, 1000),
+            'status' => fake()->randomElement(['pending', 'shipped', 'delivered']),
+            'total' => fake()->numberBetween(100, 2000),
         ];
     }
 }
