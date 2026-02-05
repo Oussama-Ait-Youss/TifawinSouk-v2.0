@@ -15,15 +15,7 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             ['role' => 'admin'],
-            ['role' => 'manager'],
-            ['role' => 'employee'],
-            ['role' => 'customer'],
-            ['role' => 'vendor'],
-            ['role' => 'supplier'],
-            ['role' => 'guest'],
-            ['role' => 'moderator'],
-            ['role' => 'developer'],
-            ['role' => 'analyst'],
+            ['role' => 'user'],
         ];
 
         foreach ($roles as $role) {

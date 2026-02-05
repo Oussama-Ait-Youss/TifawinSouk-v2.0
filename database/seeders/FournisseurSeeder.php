@@ -12,6 +12,6 @@ class FournisseurSeeder extends Seeder
      */
     public function run(): void
     {
-        Fournisseurs::factory(10)->create();
+        Fournisseurs::factory(50)->create();
     }
 }
