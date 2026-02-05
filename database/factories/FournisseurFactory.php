@@ -8,16 +8,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Fournisseurs>
  */
+
 class FournisseurFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
-     * 
+     *
      */
     use HasFactory;
-    
+
     public function definition(): array
     {
         return [

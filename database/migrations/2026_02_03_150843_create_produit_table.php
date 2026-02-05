@@ -18,8 +18,8 @@ return new class extends Migration
             $table->float('prix_achat');
             $table->float('prix_vente');
             $table->integer('stock');
-            $table->foreign('category_id')->references('id')->on('category');
-            $table->foreign('produit_id')->references('id')->on('produit');
+            $table->foreignId('category_id')->constrained('category');
+            $table->foreignId('fournisseurs_id')->constrained('fournisseurs');
             $table->timestamps();
         });
     }
