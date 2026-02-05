@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Product;
+use App\Models\Produit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -12,21 +12,22 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OrderItemFactory extends Factory
 {
-    protected $model = OrderItem::class;    
-
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
-        $qty = $this->faker->numberBetween(1, 5);
-        $unit = $this->faker->randomFloat(2, 5, 500);
+        $quantity = fake()->numberBetween(1, 10);
+        $unitPrice = fake()->randomFloat(2, 5, 500);
 
         return [
             'order_id' => Order::factory(),
-
-            'product_id' => Product::factory(),
-
-            'quantity' => $qty,
-            'unit_price' => $unit,
-            'line_total' => round($qty * $unit, 2),
+            'product_id' => Produit::factory(),
+            'quantity' => $quantity,
+            'unit_price' => $unitPrice,
+            'line_total' => round($quantity * $unitPrice, 2),
         ];
     }
 }
