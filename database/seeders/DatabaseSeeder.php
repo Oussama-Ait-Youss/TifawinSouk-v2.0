@@ -26,6 +26,6 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
         ]);
 
-        User::factory(10)->create();
+        User::factory(50)->create();
     }
 }
