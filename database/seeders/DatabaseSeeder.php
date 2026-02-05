@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use App\Models\Fournisseurs;
+use App\Models\Produit;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ProduitSeeder::class,
 
             OrderSeeder::class,
+            OrderItemSeeder::class;
 
         ]);
     }
