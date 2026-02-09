@@ -1,8 +1,0 @@
-lvim.builtin.treesitter.ensure_installed = {
-  "php",
-  "html",
-  "css",
-  "javascript",
-  "blade",
-}
-
