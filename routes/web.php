@@ -7,9 +7,11 @@ use App\Http\Controllers\Admin\FournisseurController;
 
 use App\Http\Controllers\Client\OrderController as ClientOrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Models\Product;
 
 Route::get('/', function () {
-    return view('home');
+    $products = Product::all();
+    return view('home', compact('products'));
 });
 
 Route::get('/dashboard', function () {
