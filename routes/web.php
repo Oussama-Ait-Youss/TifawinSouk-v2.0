@@ -9,7 +9,7 @@ use App\Http\Controllers\Client\OrderController as ClientOrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
