@@ -64,11 +64,11 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:25',
-            'slug' => 'required|max:50|unique:categories,slug,' . $category->id
+            'slug' => 'required|max:50|unique:category,slug,' . $category->id
         ]);
 
         $category->update($validated);
-        return redirect()->route('admin.category.index');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -77,6 +77,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('admin.category.index');
+        return redirect()->route('category.index');
     }
 }
