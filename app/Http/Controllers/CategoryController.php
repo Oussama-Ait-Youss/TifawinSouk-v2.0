@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::all();
-        return view('category.index',compact('category'));
+        return view('admin.category.index', compact('category'));
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        return view('admin.category.create');
     }
 
     /**
@@ -30,8 +30,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $category = $request->validate([
-            'name'=> 'required|max:25',
-            'slug'=>'required|max:50'
+            'name' => 'required|max:25',
+            'slug' => 'required|max:50'
 
         ]);
         Category::create($category);
@@ -45,7 +45,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return view('category.show',compact('category'));
+        return view('category.show', compact('category'));
     }
 
     /**
@@ -54,22 +54,21 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
-        return view('category.edit', compact('category'));
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        $valcategory = $request->validate([
-            'name'=> 'required|max:25',
-            'slug'=>'required|max:50'
+        $validated = $request->validate([
+            'name' => 'required|max:25',
+            'slug' => 'required|max:50|unique:categories,slug,' . $category->id
         ]);
 
-        $category = Category::findOrFail($id);
-        $category->update($valcategory);
-        return redirect()->route('category.index');
+        $category->update($validated);
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -78,6 +77,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 }
