@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Produit;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $products = Produit::select('nom','prix_vente','stock')->get();
+    return view('home',compact('products'));
 });
 
 Route::get('/dashboard', function () {
