@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.admin')
+
+@section('content')
+<!-- <body>
 
     <div class="min-h-screen bg-gray-900 flex items-center justify-center p-6">
 
@@ -38,5 +33,40 @@
         </div>
     </div>
 
-</body>
-</html>
+</body> -->
+
+
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white shadow-sm rounded-xl p-8">
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800">Modifier le fournisseur : {{ $category->name }}</h2>
+            <p class="text-gray-600">Mettez à jour les informations de Categori.</p>
+        </div>
+
+        
+        <form action="{{ route('category.update', $category) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col">
+                    <label class="font-medium text-gray-700 mb-2">Name</label>
+                    <input type="text" name="name" value="{{ old('name', $category->name) }}" class="border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="font-medium text-gray-700 mb-2">Slug</label>
+                    <input type="text" name="slug" value="{{ old('slug', $category->slug) }}" class="border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+            </div>
+
+            <div class="mt-8 flex items-center justify-end space-x-4">
+                <a href="{{ route('category.index') }}" class="text-gray-600 hover:text-gray-800">Annuler</a>
+                <button type="submit" class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-indigo-700 transition shadow-md">
+                    Mettre à jour la category
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection

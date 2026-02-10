@@ -1,58 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+@extends('layouts.admin')
 
-    <title>Document</title>
-</head>
-<body>
-    <div class="p-6 bg-gray-900 min-h-screen">
-
-    <div class="flex flex-row justify-between">
-        <div class="flex justify-between items-center mb-5">
-            <h1 class="text-2xl font-bold text-gray-100">Categories</h1>
-        </div>
-
-         <div class="flex justify-between items-center mb-5">
-                <a href="{{ route('category.create') }}" class="bg-blue-700 text-white px-4 py-2 rounded">+ Add Category</a>
-
-            </div>
-
+@section('content')
+    <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+        <h2 class="text-xl font-semibold text-gray-800">Liste des Category</h2>
+        <a href="{{ route('category.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">
+            + Ajouter une category
+        </a>
     </div>
            
 
-        <div class="overflow-x-auto bg-gray-800 rounded shadow">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-700 text-gray-100">
-                        <th class="px-4 py-2">Name</th>
-                        <th class="px-4 py-2">Slug</th>
-                        <th class="px-4 py-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($category as $cat)
-                        <tr class="border-b border-gray-700 text-gray-200 hover:bg-gray-700">
-                            <td class="px-4 py-2">{{ $cat->name }}</td>
-                            <td class="px-4 py-2">{{ $cat->slug }}</td>
-                            <td class="px-4 py-2 flex gap-2">
-                                <a href="{{ route('category.edit', $cat) }}"
-                                    class="bg-yellow-300 text-black px-3 py-1 rounded">Edit</a>
-                                <form action="{{ route('category.destroy', $cat) }}" method="POST"
-                                    onsubmit="return confirm('Delete this category?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="bg-red-700 text-white px-3 py-1 rounded">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+        <table class="w-full text-left border-collapse">
+        <thead class="bg-gray-50 text-gray-600 uppercase text-sm">
+            <tr>
+                <th class="px-6 py-4 font-medium">Category Name</th>
+                <th class="px-6 py-4 font-medium">Slug</th>
+                <th class="px-6 py-4 font-medium text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 text-gray-700">
+            @foreach($category as $cat)
+            <tr class="hover:bg-gray-50 transition">
+                <td class="px-6 py-4 font-medium">{{ $cat->name }}</td>
+                <td class="px-6 py-4">{{ $cat->slug }}</td>
+    
+                <td class="px-6 py-4 text-right space-x-3">
+                    <a href="{{ route('category.edit', $cat) }}" class="text-indigo-600 hover:underline">Modifier</a>
+                    <form action="{{ route('category.destroy', $cat) }}" method="POST" class="inline">
+                        @csrf @method('DELETE')
+                        <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette category ?')" class="text-red-500 hover:underline">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 
     </div>
-</body>
-</html>
+@endsection
