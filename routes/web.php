@@ -7,23 +7,14 @@ use App\Http\Controllers\Admin\FournisseurController;
 
 use App\Http\Controllers\Client\OrderController as ClientOrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Models\Product;
 
 Route::get('/', function () {
-    return view('home');
+    $products = Product::all();
+    return view('home', compact('products'));
 });
-// Let Filament handle the admin panel routes (login/dashboard).
-// Custom admin routes should be placed under the admin middleware group below.
-
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/dashboard', function () {
-    $user = Auth::user();
-
-    // If not an admin, send them back to the store/home.
-    if (! $user || ! method_exists($user, 'isAdmin') || ! $user->isAdmin()) {
-        return redirect('/');
-    }
-
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -44,9 +35,4 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 });
 
 
-// Breeze removed: Filament will handle authentication for the app.
-// If you need storefront-specific auth later, add a custom controller + routes.
-// require __DIR__.'/auth.php';
-
-
-// fix admin panel
+require __DIR__.'/auth.php';
