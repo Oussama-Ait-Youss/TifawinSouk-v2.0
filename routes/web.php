@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Produit;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FournisseurController;
 
 Route::get('/', function () {
     $products = Produit::select('nom','prix_vente','stock')->get();
@@ -11,15 +12,15 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //Product Route
+    //category Route
     
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
@@ -28,6 +29,27 @@ Route::middleware('auth')->group(function () {
     Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+
+
+    // fournisseur
+    Route::get('/fournisseurs', [FournisseurController::class, 'index'])->name('fournisseurs.index');
+
+    // 2. Formulaire d'ajout (GET)
+    Route::get('/fournisseurs/creer', [FournisseurController::class, 'create'])->name('fournisseurs.create');
+
+    // 3. Traitement de l'ajout (POST)
+    Route::post('/fournisseurs', [FournisseurController::class, 'store'])->name('fournisseurs.store');
+
+    // 4. Formulaire de modification (GET)
+    // On passe l'ID du fournisseur dans l'URL
+    Route::get('/fournisseurs/{fournisseur}/modifier', [FournisseurController::class, 'edit'])->name('fournisseurs.edit');
+Route::put('/fournisseurs/{fournisseur}', [FournisseurController::class, 'update'])->name('fournisseurs.update');
+
+    // 6. Suppression (DELETE)
+    Route::delete('/fournisseurs/{fournisseur}', [FournisseurController::class, 'destroy'])->name('fournisseurs.destroy');
+
+
+    
 });
 
 require __DIR__.'/auth.php';

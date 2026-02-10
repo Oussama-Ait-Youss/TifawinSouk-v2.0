@@ -2,64 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fournisseur;
+use App\Models\Fournisseurs; // Utilisation du singulier par convention
 use Illuminate\Http\Request;
 
 class FournisseurController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $fournisseurs = Fournisseurs::all();
+        return view('admin.fournisseurs.index', compact('fournisseurs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.fournisseurs.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:fournisseurs,email',
+            'ville' => 'required|string|max:255',
+            'telephone' => 'required|string|max:15'
+        ]);
+
+        Fournisseurs::create($validated);
+        return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur ajouté avec succès !');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Fournisseur $fournisseur)
+    public function edit(Fournisseurs $fournisseur)
+{
+    // Vérifiez que le nom de la variable passée est bien 'fournisseur'
+    return view('admin.fournisseurs.edit', compact('fournisseur'));
+}
+
+    public function update(Request $request, Fournisseurs $fournisseur)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:fournisseurs,email,' . $fournisseur->id, // Ignore l'ID actuel pour l'unicité
+            'ville' => 'required|string|max:255',
+            'telephone' => 'required|string|max:15'
+        ]);
+
+        $fournisseur->update($validated);
+        return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur mis à jour !');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Fournisseur $fournisseur)
+    public function destroy(Fournisseurs $fournisseur)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Fournisseur $fournisseur)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Fournisseur $fournisseur)
-    {
-        //
+        $fournisseur->delete();
+        return redirect()->route('fournisseurs.index')->with('success', 'Fournisseur supprimé !');
     }
 }
