@@ -38,4 +38,3 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 require __DIR__.'/auth.php';
 
 
-// fix admin panel
