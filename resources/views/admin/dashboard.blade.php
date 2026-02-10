@@ -35,7 +35,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-sm text-gray-500 uppercase font-bold">Fournisseurs</p>
-                <p class="text-3xl font-black text-gray-800">{{ \App\Models\Fournisseur::count() }}</p>
+                <p class="text-3xl font-black text-gray-800">{{ \App\Models\Fournisseurs::count() }}</p>
             </div>
             <div class="bg-orange-100 p-3 rounded-full text-orange-600">
                 <i class="fas fa-truck fa-2x"></i>
@@ -47,8 +47,10 @@
 <div class="bg-white rounded-xl shadow-sm p-6">
     <h3 class="font-bold text-gray-700 mb-4 text-lg">Actions Rapides</h3>
     <div class="flex flex-wrap gap-4">
-        <a href="{{ route('produits.create') }}" class="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 transition">+ Nouveau Produit</a>
+        <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 transition">+ Nouveau Produit</a>
         <a href="{{ route('fournisseurs.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded shadow hover:bg-slate-800 transition">+ Nouveau Fournisseur</a>
+        <a href="{{ route('category.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded shadow hover:bg-slate-800 transition">+ Nouveau Category</a>
+        
     </div>
 </div>
 @endsection

@@ -31,15 +31,11 @@
                         <span>Produits</span>
                     </a>
 
-                    <a href="{" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('categories.*') ? 'bg-indigo-600' : '' }}">
+                    <a href="{{ route('category.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('categories.*') ? 'bg-indigo-600' : '' }}">
                         <i class="fas fa-tags w-5"></i>
                         <span>Catégories</span>
                     </a>
-
-                    <div class="pt-4 pb-2">
-                        <p class="text-xs uppercase text-gray-500 font-semibold px-3">Partenaires</p>
-                    </div>
-
+                    
                     <a href="{{ route('fournisseurs.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('fournisseurs.*') ? 'bg-indigo-600' : '' }}">
                         <i class="fas fa-truck w-5"></i>
                         <span>Fournisseurs</span>
