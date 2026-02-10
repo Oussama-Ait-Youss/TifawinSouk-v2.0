@@ -15,6 +15,16 @@ class User extends Authenticatable implements FilamentUser
     use HasFactory, Notifiable;
 
     /**
+     * Model attribute defaults.
+     * Ensures newly created users default to role_id = 2 when not provided.
+     *
+     * @var array<string, mixed>
+     */
+    protected $attributes = [
+        'role_id' => 2,
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>

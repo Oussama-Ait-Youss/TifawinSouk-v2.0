@@ -50,6 +50,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Normal users should stay on the storefront (home).
+        return redirect('/');
     }
 }

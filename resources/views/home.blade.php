@@ -55,18 +55,10 @@
                         <i class="fas fa-shopping-cart text-xl"></i>
                         <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
                     </button>
-                    @guest
-                        <a href="{{ route('login') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
-                            Connexion
-                        </a>
-                    @else
-                        <div class="flex items-center space-x-2">
-                            <span class="text-gray-700">{{ Auth::user()->name }}</span>
-                            <a href="{{ route('logout') }}" class="text-gray-500 hover:text-purple-600">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </a>
-                        </div>
-                    @endguest
+                    <!-- All auth handled by Filament: use the admin panel login -->
+                    <a href="/admin" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                        Connexion
+                    </a>
                 </div>
             </div>
         </div>
