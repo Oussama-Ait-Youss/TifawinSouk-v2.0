@@ -47,8 +47,11 @@
 <div class="p-6 bg-white shadow-sm rounded-xl">
     <h3 class="mb-4 text-lg font-bold text-gray-700">Actions Rapides</h3>
     <div class="flex flex-wrap gap-4">
-        <a href="" class="px-4 py-2 text-white transition bg-indigo-600 rounded shadow hover:bg-indigo-700">+ Nouveau Produit</a>
-        <a href="{{ route('fournisseurs.create') }}" class="px-4 py-2 text-white transition rounded shadow bg-slate-700 hover:bg-slate-800">+ Nouveau Fournisseur</a>
+
+        <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 transition">+ Nouveau Produit</a>
+        <a href="{{ route('fournisseurs.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded shadow hover:bg-slate-800 transition">+ Nouveau Fournisseur</a>
+        <a href="{{ route('category.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded shadow hover:bg-slate-800 transition">+ Nouveau Category</a>
+
     </div>
 </div>
 @endsection
