@@ -172,10 +172,10 @@
             </div>
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                 @foreach( $products as $product )
-                <div data-product-id="{{ $product->id }}" class="product-card overflow-hidden bg-white rounded-lg shadow-md card-hover cursor-pointer">
+                <div data-product-id="{{ $product->id }}" class="overflow-hidden bg-white rounded-lg shadow-md cursor-pointer product-card card-hover">
                     <div class="relative">
                         <div class="flex items-center justify-center h-48 bg-gray-200">
-                            <img class="object-cover w-full h-full" src="https://picsum.photos/seed/product-{{ $product->id ?? rand(1, 100) }}/300/300.jpg" alt="{{ $product->nom }}" onerror="this.src='https://via.placeholder.com/300x300?text=Product'">
+                            <img class="object-cover w-full h-full" src="https://picsum.photos/seed/product-{{$product->id}}/300/300.jpg" alt="{{ $product->nom }}" onerror="this.src='https://via.placeholder.com/300x300?text=Product'">
                         </div>
                         <div class="p-4">
                             <h3 class="mb-2 font-semibold text-gray-900">{{ $product->nom }}</h3>
@@ -185,7 +185,7 @@
                                 <div>
                                     <span class="text-xl font-bold text-purple-600">Prix: {{ $product->prix_vente }} DH</span>
                                 </div>
-                                <button data-product-id="{{ $product->id }}" class="add-to-cart p-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-700">
+                                <button data-product-id="{{ $product->id }}" class="p-2 text-white transition bg-purple-600 rounded-lg add-to-cart hover:bg-purple-700">
                                     <i class="fas fa-shopping-cart"></i>
                                 </button>
                             </div>
@@ -341,7 +341,7 @@
                                         <div class="text-sm">${item.name} x ${item.quantity}</div>
                                         <div class="flex items-center gap-2">
                                             <div class="text-sm font-medium">${(item.unit_price*item.quantity)} DH</div>
-                                            <button class="remove-item text-sm text-red-500" data-id="${item.id}">Supprimer</button>
+                                            <button class="text-sm text-red-500 remove-item" data-id="${item.id}">Supprimer</button>
                                         </div>`;
                                     itemsEl.appendChild(div);
                                 });
