@@ -7,48 +7,48 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 font-sans">
-    <div class="min-h-screen flex">
-        <aside class="w-64 bg-slate-900 text-white flex-shrink-0 shadow-xl">
+<body class="font-sans bg-gray-100">
+    <div class="flex min-h-screen">
+        <aside class="flex-shrink-0 w-64 text-white shadow-xl bg-slate-900">
             <div class="p-6">
-                <h1 class="text-xl font-bold tracking-widest uppercase text-indigo-400">TifawinSouk</h1>
+                <h1 class="text-xl font-bold tracking-widest text-indigo-400 uppercase">TifawinSouk</h1>
                 <p class="text-xs text-gray-400">Gestion Boutique</p>
             </div>
             
-            <nav class="mt-4 px-4">
+            <nav class="px-4 mt-4">
                 <div class="space-y-2">
                     <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-600' : '' }}">
-                        <i class="fas fa-home w-5"></i>
+                        <i class="w-5 fas fa-home"></i>
                         <span>Tableau de bord</span>
                     </a>
 
                     <div class="pt-4 pb-2">
-                        <p class="text-xs uppercase text-gray-500 font-semibold px-3">Inventaire</p>
+                        <p class="px-3 text-xs font-semibold text-gray-500 uppercase">Inventaire</p>
                     </div>
 
-                    <a href="" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('produits.*') ? 'bg-indigo-600' : '' }}">
-                        <i class="fas fa-box w-5"></i>
+                    <a href="{{ route('products.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('produits.*') ? 'bg-indigo-600' : '' }}">
+                        <i class="w-5 fas fa-box"></i>
                         <span>Produits</span>
                     </a>
 
                     <a href="{{ route('category.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('categories.*') ? 'bg-indigo-600' : '' }}">
-                        <i class="fas fa-tags w-5"></i>
+                        <i class="w-5 fas fa-tags"></i>
                         <span>Catégories</span>
                     </a>
                     
                     <a href="{{ route('fournisseurs.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('fournisseurs.*') ? 'bg-indigo-600' : '' }}">
-                        <i class="fas fa-truck w-5"></i>
+                        <i class="w-5 fas fa-truck"></i>
                         <span>Fournisseurs</span>
                     </a>
                 </div>
             </nav>
         </aside>
 
-        <div class="flex-1 flex flex-col">
-            <header class="bg-white shadow-sm p-4 flex justify-between items-center">
+        <div class="flex flex-col flex-1">
+            <header class="flex items-center justify-between p-4 bg-white shadow-sm">
                 <button class="text-gray-500 md:hidden"><i class="fas fa-bars"></i></button>
-                <div class="flex items-center space-x-4 ml-auto">
-                    <span class="text-gray-700 font-medium">{{ Auth::user()->name }}</span>
+                <div class="flex items-center ml-auto space-x-4">
+                    <span class="font-medium text-gray-700">{{ Auth::user()->name }}</span>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="text-red-500 hover:text-red-700"><i class="fas fa-sign-out-alt"></i></button>
@@ -58,7 +58,7 @@
 
             <main class="p-8">
                 @if(session('success'))
-                    <div class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 shadow-sm">
+                    <div class="p-4 mb-6 text-green-700 bg-green-100 border-l-4 border-green-500 shadow-sm">
                         {{ session('success') }}
                     </div>
                 @endif
