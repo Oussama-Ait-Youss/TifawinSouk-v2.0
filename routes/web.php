@@ -5,12 +5,30 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Produit;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\ProductController;
 
 
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+
+// Debug route to check user role
+Route::get('/debug-role', function() {
+    if (!Auth::check()) {
+        return 'Not authenticated';
+    }
+    
+    $user = Auth::user();
+    return [
+        'user_id' => $user->id,
+        'email' => $user->email,
+        'role_id' => $user->role_id,
+        'role_name' => $user->role->role ?? 'No role',
+        'is_admin_method' => method_exists($user, 'isAdmin') ? $user->isAdmin() : 'Method not found',
+        'is_admin_check' => $user->role_id === 1,
+    ];
+})->name('debug.role');
 
 // Cart routes (session-based)
 Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
@@ -33,7 +51,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin routes
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
@@ -66,7 +84,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 // User routes
-Route::middleware(['auth', 'user'])->prefix('user')->name('user.')->group(function () {
+Route::middleware(['auth', \App\Http\Middleware\UserMiddleware::class])->prefix('user')->name('user.')->group(function () {
     // User-specific routes can be added here
     // For example: order history, wishlist, etc.
 });

@@ -16,7 +16,7 @@
         </div>
 
         <!-- Form -->
-        <form class="p-6 bg-white rounded-lg shadow-lg" method="POST" action="{{ route('products.update', $product->id) }}">
+        <form class="p-6 bg-white rounded-lg shadow-lg" method="POST" action="{{ route('admin.products.update', $product->id) }}">
             @csrf
             @method('PUT')
             
@@ -135,7 +135,7 @@
 
             <!-- Buttons -->
             <div class="flex items-center justify-end space-x-4">
-                <a href="{{ route('products.index') }}" 
+                <a href="{{ route('admin.products.index') }}" 
                    class="px-6 py-2 text-gray-700 transition-colors border border-gray-300 rounded-lg hover:bg-gray-50">
                     <i class="mr-2 fas fa-times"></i>Cancel
                 </a>

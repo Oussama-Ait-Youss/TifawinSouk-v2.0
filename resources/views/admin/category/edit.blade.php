@@ -26,7 +26,7 @@
             </div>
 
             <div class="mt-8 flex items-center justify-end space-x-4">
-                <a href="{{ route('category.index') }}" class="text-gray-600 hover:text-gray-800">Annuler</a>
+                <a href="{{ route('admin.category.index') }}" class="text-gray-600 hover:text-gray-800">Annuler</a>
                 <button type="submit" class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-indigo-700 transition shadow-md">
                     Mettre à jour la category
                 </button>

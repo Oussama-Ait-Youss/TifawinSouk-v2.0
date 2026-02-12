@@ -3,7 +3,7 @@
 @section('content')
     <div class="p-6 border-b border-gray-200 flex justify-between items-center">
         <h2 class="text-xl font-semibold text-gray-800">Liste des Category</h2>
-        <a href="{{ route('category.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">
+        <a href="{{ route('admin.category.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">
             + Ajouter une category
         </a>
     </div>
@@ -24,8 +24,8 @@
                 <td class="px-6 py-4">{{ $cat->slug }}</td>
     
                 <td class="px-6 py-4 text-right space-x-3">
-                    <a href="{{ route('category.edit', $cat) }}" class="text-indigo-600 hover:underline">Modifier</a>
-                    <form action="{{ route('category.destroy', $cat) }}" method="POST" class="inline">
+                    <a href="{{ route('admin.category.edit', $cat) }}" class="text-indigo-600 hover:underline">Modifier</a>
+                    <form action="{{ route('admin.category.destroy', $cat) }}" method="POST" class="inline">
                         @csrf @method('DELETE')
                         <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette category ?')" class="text-red-500 hover:underline">
                             Supprimer

@@ -7,7 +7,7 @@
             {{ isset($fournisseur) ? 'Modifier le fournisseur' : 'Nouveau fournisseur' }}
         </h2>
 
-        <form action="{{ isset($fournisseur) ? route('fournisseurs.update', $fournisseur) : route('fournisseurs.store') }}" method="POST">
+        <form action="{{ isset($fournisseur) ? route('admin.fournisseurs.update', $fournisseur) : route('admin.fournisseurs.store') }}" method="POST">
             @csrf
             @if(isset($fournisseur)) @method('PUT') @endif
 
@@ -39,7 +39,7 @@
             </div>
 
             <div class="mt-8 flex justify-end space-x-4">
-                <a href="{{ route('fournisseurs.index') }}" class="px-6 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">Annuler</a>
+                <a href="{{ route('admin.fournisseurs.index') }}" class="px-6 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">Annuler</a>
                 <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-md">
                     {{ isset($fournisseur) ? 'Mettre à jour' : 'Enregistrer' }}
                 </button>

@@ -73,7 +73,7 @@
                     <option value="50">50 per page</option>
                 </select>
                 
-                <a href="{{ route('products.create') }}" class="flex items-center gap-2 px-4 py-2 text-white transition-colors bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700">
+                <a href="{{ route('admin.products.create') }}" class="flex items-center gap-2 px-4 py-2 text-white transition-colors bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700">
                     <i class="fas fa-plus"></i>
                     <span>Add Product</span>
                 </a>
@@ -202,13 +202,13 @@
                     </td>
                     <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                         <div class="flex items-center justify-end gap-2">
-                            <a href="{{ route('product.show', $product->id) }}" class="p-2 text-blue-600 transition-colors rounded-lg hover:text-blue-900 hover:bg-blue-50" title="View Details">
+                            <a href="{{ route('admin.product.show', $product->id) }}" class="p-2 text-blue-600 transition-colors rounded-lg hover:text-blue-900 hover:bg-blue-50" title="View Details">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="{{ route('products.edit',$product->id) }}" class="p-2 text-green-600 transition-colors rounded-lg hover:text-green-900 hover:bg-green-50" title="Edit Product">
+                            <a href="{{ route('admin.products.edit',$product->id) }}" class="p-2 text-green-600 transition-colors rounded-lg hover:text-green-900 hover:bg-green-50" title="Edit Product">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline">
+                            <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="p-2 text-red-600 transition-colors rounded-lg hover:text-red-900 hover:bg-red-50" title="Delete Product" onclick="return confirm('Are you sure you want to delete this product?')">

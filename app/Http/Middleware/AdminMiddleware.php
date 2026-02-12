@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
@@ -16,11 +17,14 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->isAdmin()) {
-            return $next($request);
+        if (!Auth::check()) {
+            return redirect('/login')->with('error', 'Please login first.');
         }
 
-        // Redirect to home or show unauthorized page
-        return redirect('/')->with('error', 'Access denied. Admin privileges required.');
+        if (Auth::user()->role_id !== 1) {
+            return redirect('/')->with('error', 'Access denied. Admin privileges required.');
+        }
+
+        return $next($request);
     }
 }
