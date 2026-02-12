@@ -9,7 +9,17 @@ use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\ProductController;
 
 
+
 Route::get('/',[HomeController::class,'index'])->name('home');
+
+// Cart routes (session-based)
+Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
+Route::post('/cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('cart.clear');
+Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+
+// Place order (requires auth)
+Route::post('/orders', [App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');
 
 Route::get('/dashboard', function () {
         return view('admin.dashboard');
