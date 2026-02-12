@@ -61,10 +61,13 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                    <button class="relative p-2 text-gray-600 hover:text-purple-600">
-                        <i class="text-xl fas fa-shopping-cart"></i>
-                        <span class="absolute flex items-center justify-center w-5 h-5 text-xs text-white bg-red-500 rounded-full -top-1 -right-1">0</span>
-                    </button>
+                    <div class="relative">
+                        <button id="cart-toggle" class="relative p-2 text-gray-600 hover:text-purple-600">
+                            <i class="text-xl fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="absolute flex items-center justify-center w-5 h-5 text-xs text-white bg-red-500 rounded-full -top-1 -right-1">0</span>
+                        </button>
+                        @include('partials.cart_dropdown')
+                    </div>
                     @guest
                     <a href="{{ route('login') }}" class="px-4 py-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-700">
                         Connexion
@@ -144,34 +147,16 @@
             </div>
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <!-- Category Cards -->
-                <div class="p-6 text-white rounded-lg cursor-pointer category-card card-hover">
-                    <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
-                        <i class="text-2xl fas fa-tshirt"></i>
-                    </div>
-                    <h3 class="mb-2 text-lg font-semibold">Vêtements</h3>
-                    <p class="text-sm opacity-90">Mode et accessoires</p>
-                </div>
-                <div class="p-6 text-white rounded-lg cursor-pointer bg-gradient-to-br from-green-400 to-blue-500 card-hover">
-                    <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
-                        <i class="text-2xl fas fa-laptop"></i>
-                    </div>
-                    <h3 class="mb-2 text-lg font-semibold">Électronique</h3>
-                    <p class="text-sm opacity-90">Appareils et gadgets</p>
-                </div>
-                <div class="p-6 text-white rounded-lg cursor-pointer bg-gradient-to-br from-yellow-400 to-orange-500 card-hover">
-                    <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
-                        <i class="text-2xl fas fa-home"></i>
-                    </div>
-                    <h3 class="mb-2 text-lg font-semibold">Maison</h3>
-                    <p class="text-sm opacity-90">Meubles et décoration</p>
-                </div>
-                <div class="p-6 text-white rounded-lg cursor-pointer bg-gradient-to-br from-pink-400 to-red-500 card-hover">
-                    <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
-                        <i class="text-2xl fas fa-basketball-ball"></i>
-                    </div>
-                    <h3 class="mb-2 text-lg font-semibold">Sports</h3>
-                    <p class="text-sm opacity-90">Équipements sportifs</p>
-                </div>
+                 @foreach ($categories as $cate)
+                 
+                 <div class="p-6 text-white rounded-lg cursor-pointer category-card card-hover">
+                     <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
+                         <i class="text-2xl fas fa-tshirt"></i>
+                     </div>
+                     <h3 class="mb-2 text-lg font-semibold">{{ $cate->name }}</h3>
+                     <p class="text-sm opacity-90">{{ $cate->slug }}</p>
+                 </div>
+                 @endforeach           
             </div>
         </div>
     </section>
@@ -187,21 +172,22 @@
             </div>
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                 @foreach( $products as $product )
-                <div class="overflow-hidden bg-white rounded-lg shadow-md card-hover">
+                <div data-product-id="{{ $product->id }}" class="product-card overflow-hidden bg-white rounded-lg shadow-md card-hover cursor-pointer">
                     <div class="relative">
                         <div class="flex items-center justify-center h-48 bg-gray-200">
                             <img class="object-cover w-full h-full" src="https://picsum.photos/seed/product-{{ $product->id ?? rand(1, 100) }}/300/300.jpg" alt="{{ $product->nom }}" onerror="this.src='https://via.placeholder.com/300x300?text=Product'">
                         </div>
                         <div class="p-4">
                             <h3 class="mb-2 font-semibold text-gray-900">{{ $product->nom }}</h3>
+                            <div class="mb-2 text-xs text-gray-500">ID: {{ $product->id }}</div>
                             <p class="mb-3 text-sm text-gray-600">Produit Stock: {{ $product->stock }}</p>
                             <div class="flex items-center justify-between">
                                 <div>
                                     <span class="text-xl font-bold text-purple-600">Prix: {{ $product->prix_vente }} DH</span>
                                 </div>
-                                <a href="" class="p-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-700">
+                                <button data-product-id="{{ $product->id }}" class="add-to-cart p-2 text-white transition bg-purple-600 rounded-lg hover:bg-purple-700">
                                     <i class="fas fa-shopping-cart"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -315,6 +301,9 @@
     </footer>
 
     <script>
+        const apiAdd = "{{ route('cart.add') }}";
+        const apiShow = "{{ route('cart.show') }}";
+
         // Add some interactivity
         document.addEventListener('DOMContentLoaded', function() {
             // Smooth scrolling for anchor links
@@ -330,16 +319,158 @@
                 });
             });
 
-            // Add to cart animation
-            document.querySelectorAll('.fa-shopping-cart').forEach(cart => {
-                cart.parentElement.addEventListener('click', function(e) {
+            // Add to cart behaviour
+            function refreshCartUI() {
+                fetch(apiShow, { credentials: 'same-origin', headers: { 'Accept': 'application/json' } })
+                    .then(r => r.json())
+                    .then(data => {
+                        const cart = data.cart || {};
+                        const total = data.total || 0;
+                        const count = Object.values(cart).reduce((s, i) => s + i.quantity, 0);
+                        document.getElementById('cart-count').innerText = count;
+
+                        const itemsEl = document.getElementById('cart-items');
+                        itemsEl.innerHTML = '';
+                        if (count === 0) {
+                            itemsEl.innerHTML = '<p class="text-sm text-gray-500">Aucun produit dans le panier.</p>';
+                        } else {
+                                Object.values(cart).forEach(item => {
+                                    const div = document.createElement('div');
+                                    div.className = 'flex items-center justify-between';
+                                    div.innerHTML = `
+                                        <div class="text-sm">${item.name} x ${item.quantity}</div>
+                                        <div class="flex items-center gap-2">
+                                            <div class="text-sm font-medium">${(item.unit_price*item.quantity)} DH</div>
+                                            <button class="remove-item text-sm text-red-500" data-id="${item.id}">Supprimer</button>
+                                        </div>`;
+                                    itemsEl.appendChild(div);
+                                });
+
+                                // attach remove handlers
+                                itemsEl.querySelectorAll('.remove-item').forEach(btn => {
+                                    btn.addEventListener('click', function(e) {
+                                        e.stopPropagation();
+                                        const id = this.dataset.id;
+                                        const form = new FormData();
+                                        form.append('product_id', id);
+                                        fetch("{{ route('cart.remove') }}", {
+                                            method: 'POST',
+                                            credentials: 'same-origin',
+                                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                            body: form
+                                        })
+                                        .then(r => r.json().catch(() => ({})))
+                                        .then(resp => {
+                                            if (resp && resp.success) {
+                                                refreshCartUI();
+                                            } else {
+                                                console.error('Remove failed', resp);
+                                                alert(resp.message || 'Impossible de supprimer le produit.');
+                                            }
+                                        })
+                                        .catch(err => {
+                                            console.error(err);
+                                            alert('Erreur réseau lors de la suppression');
+                                        });
+                                    });
+                                });
+                        }
+                        document.getElementById('cart-total').innerText = total + ' DH';
+                    });
+            }
+
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function(e) {
                     e.preventDefault();
+                    const id = this.dataset.productId;
                     this.classList.add('animate-bounce');
-                    setTimeout(() => {
-                        this.classList.remove('animate-bounce');
-                    }, 1000);
+                    if (!id) {
+                        console.error('No product id on card');
+                        alert('Erreur: product id manquant');
+                        return;
+                    }
+                    const form = new FormData();
+                    form.append('product_id', id);
+                    form.append('quantity', 1);
+
+                    fetch(apiAdd, {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: form
+                    })
+                    .then(r => r.json().catch(() => ({})))
+                    .then(resp => {
+                        setTimeout(() => { this.classList.remove('animate-bounce'); }, 300);
+                        if (resp && resp.success) {
+                            refreshCartUI();
+                        } else {
+                            console.error('Add to cart failed', resp);
+                            alert(resp.message || 'Impossible d\'ajouter le produit au panier.');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('Erreur réseau lors de l\'ajout au panier');
+                    });
                 });
             });
+
+            // clicking the product card (except inner buttons/links) adds to cart
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('button') || e.target.closest('a')) return;
+                    const id = this.dataset.productId;
+                    this.classList.add('animate-bounce');
+                    if (!id) {
+                        console.error('No product id on card');
+                        alert('Erreur: product id manquant');
+                        return;
+                    }
+                    const form2 = new FormData();
+                    form2.append('product_id', id);
+                    form2.append('quantity', 1);
+                    fetch(apiAdd, {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: form2
+                    })
+                    .then(r => r.json().catch(() => ({})))
+                    .then(resp => {
+                        setTimeout(() => { this.classList.remove('animate-bounce'); }, 300);
+                        if (resp && resp.success) {
+                            refreshCartUI();
+                        } else {
+                            console.error('Add to cart failed', resp);
+                            alert(resp.message || 'Impossible d\'ajouter le produit au panier.');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('Erreur réseau lors de l\'ajout au panier');
+                    });
+                });
+            });
+
+            // Cart dropdown toggle
+            const cartToggle = document.getElementById('cart-toggle');
+            const cartDropdown = document.getElementById('cart-dropdown');
+            cartToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                cartDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', function() {
+                cartDropdown.classList.add('hidden');
+            });
+
+            // initial load
+            refreshCartUI();
+
         });
     </script>
 </body>
