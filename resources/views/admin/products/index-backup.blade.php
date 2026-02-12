@@ -231,15 +231,7 @@
             <div class="px-6 py-4 border-t border-gray-200">
                 <div class="flex items-center justify-center">
                     <div class="flex gap-2">
-                        <button class="px-3 py-1 text-sm transition-colors border border-gray-300 rounded-md hover:bg-gray-50">
-                            Previous
-                        </button>
-                        <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md">
-                            1
-                        </button>
-                        <button class="px-3 py-1 text-sm transition-colors border border-gray-300 rounded-md hover:bg-gray-50">
-                            Next
-                        </button>
+                      {{ $products->links() }}
                     </div>
                 </div>
             </div>
