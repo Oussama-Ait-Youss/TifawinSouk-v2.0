@@ -4,7 +4,7 @@
 <div class="bg-white rounded-xl shadow-sm overflow-hidden">
     <div class="p-6 border-b border-gray-200 flex justify-between items-center">
         <h2 class="text-xl font-semibold text-gray-800">Liste des Fournisseurs</h2>
-        <a href="{{ route('fournisseurs.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">
+        <a href="{{ route('admin.fournisseurs.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">
             + Ajouter un Fournisseur
         </a>
     </div>
@@ -27,8 +27,8 @@
                     <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">{{ $f->ville }}</span>
                 </td>
                 <td class="px-6 py-4 text-right space-x-3">
-                    <a href="{{ route('fournisseurs.edit', $f) }}" class="text-indigo-600 hover:underline">Modifier</a>
-                    <form action="{{ route('fournisseurs.destroy', $f) }}" method="POST" class="inline">
+                    <a href="{{ route('admin.fournisseurs.edit', $f) }}" class="text-indigo-600 hover:underline">Modifier</a>
+                    <form action="{{ route('admin.fournisseurs.destroy', $f) }}" method="POST" class="inline">
                         @csrf @method('DELETE')
                         <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer ce fournisseur ?')" class="text-red-500 hover:underline">
                             Supprimer

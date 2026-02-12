@@ -31,7 +31,7 @@
                     <h1 class="text-2xl font-bold text-gray-900">Product Details</h1>
                 </div>
                 <nav class="flex space-x-4">
-                    <a href="{{ route('products.index') }}" class="px-3 py-2 text-sm font-medium text-gray-500 transition-colors rounded-md hover:text-gray-700">
+                    <a href="{{ route('admin.products.index') }}" class="px-3 py-2 text-sm font-medium text-gray-500 transition-colors rounded-md hover:text-gray-700">
                         <i class="mr-2 fas fa-arrow-left"></i>Back to Products
                     </a>
                 </nav>
@@ -215,11 +215,11 @@
                     </div>
                     
                     <div class="space-y-3">
-                        <a href="" class="flex items-center justify-center w-full px-4 py-2 text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
+                        <a href="{{ route('admin.products.edit', $product->id) }}" class="flex items-center justify-center w-full px-4 py-2 text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
                             <i class="mr-2 fas fa-edit"></i>
                             Edit Product
                         </a>
-                        <a href="{{ route('products.index') }}" class="flex items-center justify-center w-full px-4 py-2 text-gray-700 transition-colors bg-gray-100 rounded-lg hover:bg-gray-200">
+                        <a href="{{ route('admin.products.index') }}" class="flex items-center justify-center w-full px-4 py-2 text-gray-700 transition-colors bg-gray-100 rounded-lg hover:bg-gray-200">
                             <i class="mr-2 fas fa-arrow-left"></i>
                             Back to List
                         </a>

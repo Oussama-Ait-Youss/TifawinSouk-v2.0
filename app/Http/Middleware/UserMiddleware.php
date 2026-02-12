@@ -16,7 +16,11 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->isUser()) {
+        if (!Auth::check()) {
+            return redirect('/login')->with('error', 'Please login first.');
+        }
+
+        if (Auth::user()->role_id === 2) {
             return $next($request);
         }
 

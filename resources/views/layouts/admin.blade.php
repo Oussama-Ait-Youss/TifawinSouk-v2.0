@@ -26,17 +26,17 @@
                         <p class="px-3 text-xs font-semibold text-gray-500 uppercase">Inventaire</p>
                     </div>
 
-                    <a href="{{ route('products.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('produits.*') ? 'bg-indigo-600' : '' }}">
+                    <a href="{{ route('admin.products.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('produits.*') ? 'bg-indigo-600' : '' }}">
                         <i class="w-5 fas fa-box"></i>
                         <span>Produits</span>
                     </a>
 
-                    <a href="{{ route('category.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('categories.*') ? 'bg-indigo-600' : '' }}">
+                    <a href="{{ route('admin.category.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('categories.*') ? 'bg-indigo-600' : '' }}">
                         <i class="w-5 fas fa-tags"></i>
                         <span>Catégories</span>
                     </a>
                     
-                    <a href="{{ route('fournisseurs.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('fournisseurs.*') ? 'bg-indigo-600' : '' }}">
+                    <a href="{{ route('admin.fournisseurs.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('fournisseurs.*') ? 'bg-indigo-600' : '' }}">
                         <i class="w-5 fas fa-truck"></i>
                         <span>Fournisseurs</span>
                     </a>

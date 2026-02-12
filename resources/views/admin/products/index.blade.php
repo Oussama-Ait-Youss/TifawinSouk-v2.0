@@ -36,17 +36,17 @@
                         <p class="px-3 text-xs font-semibold text-gray-500 uppercase">Inventaire</p>
                     </div>
 
-                    <a href="{{ route('products.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('products.*') ? 'bg-indigo-600' : '' }}">
+                    <a href="{{ route('admin.products.create') }}" class="flex items-center gap-2 px-4 py-2 text-white transition-colors bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700">
                         <i class="w-5 fas fa-box"></i>
                         <span>Produits</span>
                     </a>
 
-                    <a href="{{ route('category.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('category.*') ? 'bg-indigo-600' : '' }}">
+                    <a href="{{ route('admin.category.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('category.*') ? 'bg-indigo-600' : '' }}">
                         <i class="w-5 fas fa-tags"></i>
                         <span>Catégories</span>
                     </a>
 
-                    <a href="{{ route('fournisseurs.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('fournisseurs.*') ? 'bg-indigo-600' : '' }}">
+                    <a href="{{ route('admin.fournisseurs.index') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-800 transition {{ request()->routeIs('fournisseurs.*') ? 'bg-indigo-600' : '' }}">
                         <i class="w-5 fas fa-truck"></i>
                         <span>Fournisseurs</span>
                     </a>
@@ -65,7 +65,7 @@
                             <h1 class="text-2xl font-bold text-gray-900">Products Management</h1>
                         </div>
                         <nav class="flex space-x-4">
-                            <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 text-sm font-medium text-gray-500 transition-colors rounded-md hover:text-gray-700">
+                    <a href="{{ route('admin.dashboard') }}" class="p-2 text-green-600 transition-colors rounded-lg hover:text-green-900 hover:bg-green-50" title="Dashboard">
                                 <i class="mr-2 fas fa-chart-bar"></i>Dashboard
                             </a>
                         </nav>

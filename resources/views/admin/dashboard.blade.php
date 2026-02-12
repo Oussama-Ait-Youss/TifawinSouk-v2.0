@@ -49,8 +49,8 @@
     <div class="flex flex-wrap gap-4">
 
         <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 transition">+ Nouveau Produit</a>
-        <a href="{{ route('fournisseurs.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded shadow hover:bg-slate-800 transition">+ Nouveau Fournisseur</a>
-        <a href="{{ route('category.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded shadow hover:bg-slate-800 transition">+ Nouveau Category</a>
+        <a href="{{ route('admin.fournisseurs.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded shadow hover:bg-slate-800 transition">+ Nouveau Fournisseur</a>
+        <a href="{{ route('admin.category.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded shadow hover:bg-slate-800 transition">+ Nouveau Category</a>
 
     </div>
 </div>
