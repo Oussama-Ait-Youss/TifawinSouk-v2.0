@@ -79,4 +79,14 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('category.index');
     }
+
+    /**
+     * Display all categories for clients on the home page.
+     */
+    public function showCategories()
+    {
+        $categories = Category::all();
+        return view('home', compact('categories'));
+    }
+
 }
