@@ -67,6 +67,10 @@ Route::middleware('auth')->group(function () {
     // 6. Suppression (DELETE)
     Route::delete('/fournisseurs/{fournisseur}', [FournisseurController::class, 'destroy'])->name('fournisseurs.destroy');
 
+    Route::get('/products',function(){
+        $products = Produit::paginate(10);
+        return view('products-index',compact('products'));
+    })->name('products.home');
 
     
 });

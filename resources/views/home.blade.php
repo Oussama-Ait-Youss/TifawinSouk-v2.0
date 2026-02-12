@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TifawinSouk - Plateforme de Gestion du Commerce Local</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    @livewireStyles
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -48,19 +50,16 @@
                         <span class="text-xl font-bold text-gray-800">TifawinSouk</span>
                     </div>
                     <div class="hidden md:ml-10 md:flex md:space-x-8">
-                        <a href="#" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Accueil</a>
-                        <a href="#" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-purple-600">Produits</a>
+                        <a href="{{ route('home') }}" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Accueil</a>
+                        <a href="{{ route('products.home') }}" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-purple-600">Produits</a>
                         <a href="#" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-purple-600">Catégories</a>
                         <a href="#" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-purple-600">Contact</a>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="relative">
-                        <input type="text" placeholder="Rechercher un produit..." class="w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
-                        <button class="absolute right-2 top-2.5 text-gray-400 hover:text-purple-600">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    @livewire('search-component')
+                </div>
                     <div class="relative">
                         <button id="cart-toggle" class="relative p-2 text-gray-600 hover:text-purple-600">
                             <i class="text-xl fas fa-shopping-cart"></i>
@@ -299,6 +298,8 @@
             </div>
         </div>
     </footer>
+
+    @livewireScripts
 
     <script>
         const apiAdd = "{{ route('cart.add') }}";
