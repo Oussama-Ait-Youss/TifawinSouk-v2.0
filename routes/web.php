@@ -1,16 +1,15 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Produit;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\ProductController;
 
-Route::get('/', function () {
-    $products = Produit::select('nom','prix_vente','stock')->get();
-    return view('home',compact('products'));
-});
+
+Route::get('/',[HomeController::class,'index'])->name('home');
 
 Route::get('/dashboard', function () {
         return view('admin.dashboard');
@@ -53,7 +52,7 @@ Route::middleware('auth')->group(function () {
     // 4. Formulaire de modification (GET)
     // On passe l'ID du fournisseur dans l'URL
     Route::get('/fournisseurs/{fournisseur}/modifier', [FournisseurController::class, 'edit'])->name('fournisseurs.edit');
-Route::put('/fournisseurs/{fournisseur}', [FournisseurController::class, 'update'])->name('fournisseurs.update');
+    Route::put('/fournisseurs/{fournisseur}', [FournisseurController::class, 'update'])->name('fournisseurs.update');
 
     // 6. Suppression (DELETE)
     Route::delete('/fournisseurs/{fournisseur}', [FournisseurController::class, 'destroy'])->name('fournisseurs.destroy');

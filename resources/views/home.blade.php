@@ -144,34 +144,16 @@
             </div>
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <!-- Category Cards -->
-                <div class="p-6 text-white rounded-lg cursor-pointer category-card card-hover">
-                    <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
-                        <i class="text-2xl fas fa-tshirt"></i>
-                    </div>
-                    <h3 class="mb-2 text-lg font-semibold">Vêtements</h3>
-                    <p class="text-sm opacity-90">Mode et accessoires</p>
-                </div>
-                <div class="p-6 text-white rounded-lg cursor-pointer bg-gradient-to-br from-green-400 to-blue-500 card-hover">
-                    <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
-                        <i class="text-2xl fas fa-laptop"></i>
-                    </div>
-                    <h3 class="mb-2 text-lg font-semibold">Électronique</h3>
-                    <p class="text-sm opacity-90">Appareils et gadgets</p>
-                </div>
-                <div class="p-6 text-white rounded-lg cursor-pointer bg-gradient-to-br from-yellow-400 to-orange-500 card-hover">
-                    <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
-                        <i class="text-2xl fas fa-home"></i>
-                    </div>
-                    <h3 class="mb-2 text-lg font-semibold">Maison</h3>
-                    <p class="text-sm opacity-90">Meubles et décoration</p>
-                </div>
-                <div class="p-6 text-white rounded-lg cursor-pointer bg-gradient-to-br from-pink-400 to-red-500 card-hover">
-                    <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
-                        <i class="text-2xl fas fa-basketball-ball"></i>
-                    </div>
-                    <h3 class="mb-2 text-lg font-semibold">Sports</h3>
-                    <p class="text-sm opacity-90">Équipements sportifs</p>
-                </div>
+                 @foreach ($categories as $cate)
+                 
+                 <div class="p-6 text-white rounded-lg cursor-pointer category-card card-hover">
+                     <div class="flex items-center justify-center w-12 h-12 p-3 mb-4 bg-white rounded-full bg-opacity-20">
+                         <i class="text-2xl fas fa-tshirt"></i>
+                     </div>
+                     <h3 class="mb-2 text-lg font-semibold">{{ $cate->name }}</h3>
+                     <p class="text-sm opacity-90">{{ $cate->slug }}</p>
+                 </div>
+                 @endforeach           
             </div>
         </div>
     </section>
